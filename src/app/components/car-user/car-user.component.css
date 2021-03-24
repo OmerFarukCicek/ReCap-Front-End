@@ -1,6 +1,10 @@
 .table td {
     text-align: center;
+    border-width: 2px;
+    border-color: rgb(255, 183, 95);
  }
 .table th {
     text-align: center;
+    border-width: 2px;
+    border-color: rgb(0, 0, 75);   
 }

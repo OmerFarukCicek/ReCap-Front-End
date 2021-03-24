@@ -1,20 +1,33 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title" style="text-align: center;">Kullanıcılar</h5>
+      </div>
+      <div class="card-body">
+        <table *ngIf="dataLoaded==true" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Ad</th>
+              <th>Soyad</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let carUser of carUsers">
+              <td>{{ carUser.id }}</td>
+              <td>{{ carUser.firstName }}</td>
+              <td>{{ carUser.lastName }}</td>
+              <td>{{ carUser.email }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <table *ngIf="dataLoaded==true" class="table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Ad</th>
-        <th>Soyad</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let carUser of carUsers">
-      <td>{{ carUser.id }}</td>
-      <td>{{ carUser.firstName }}</td>
-      <td>{{ carUser.lastName }}</td>
-      <td>{{ carUser.email }}</td>
-    </tr>
-  </table>
-  
+</div>
