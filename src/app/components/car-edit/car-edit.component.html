@@ -1,44 +1,86 @@
 <div class="content">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header"><h5 class="title">Araba Düzenle</h5></div>
+            <div class="card-header">
+                <h5 class="title">Araba Düzenle</h5>
+            </div>
             <div class="card-body">
-                <form [formGroup]="carAddForm">
+                <div class="mb-3">
+                    <label for="filterText" class="form-label" style="margin-left: 45%; font-weight: bold;">Araba
+                        ara</label>
+                    <input type="text" [(ngModel)]="filterText" class="form-control" id="carfilterText"
+                        placeholder="arama ifadesi giriniz">
+                </div>
+                <div *ngIf="filterText.length>2" class="alert alert-success">
+                    {{filterText}} aradınız.
+                </div>
+                <label *ngIf="!mainCar"  style="margin-left: 38%; font-weight: bold;">Güncellemek İçin Araç Seçiniz.</label>
+                <table *ngIf="dataLoaded!=false" class="table table-bordered">
+                    <thead>
+                        <tr class="table">
+                            <th>Id</th>
+                            <th>Marka Adı</th>
+                            <th>Renk</th>
+                            <th>Findeks Değeri</th>
+                            <th>Model Yılı</th>
+                            <th>Günlük Fiyat</th>
+                            <th>Açıklama</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr routerLink="/cars/update/{{ car.carId }}" *ngFor="let car of cars | carFilter:filterText">
+                            <td>{{ car.carId }}</td>
+                            <td>{{ car.brandName }}</td>
+                            <td>{{ car.colorName }}</td>
+                            <td>{{ car.minFindeks }}</td>
+                            <td>{{ car.modelYear }}</td>
+                            <td>{{ car.dailyPrice | currency:'₺ '}}</td>
+                            <td>{{ car.carName }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form *ngIf="mainCar">
                     <div class="mb-3">
                         <label for="brandId">Marka Adı</label>
-                        <select class="form-select" aria-label="Default select example" class="form-control" formControlName="brandId">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="mainCar.brandId" [ngModelOptions]="{standalone: true}">
                             <option *ngFor="let brand of brands" value="{{brand.brandId}}">{{brand.brandName}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="colorId">Renk Adı</label>
-                        <select class="form-select" aria-label="Default select example" class="form-control" formControlName="colorId">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="mainCar.colorId" [ngModelOptions]="{standalone: true}">
                             <option *ngFor="let color of colors" value="{{color.colorId}}">{{color.colorName}}</option>
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="minFindeks">Minimum Findeks Değeri</label>
+                        <div class="form-group">
+                            <input type="number" id="minFindeks" placeholder="Model Yılı" [(ngModel)]="mainCar.minFindeks" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="modelYear">Model Yılı</label>
                         <div class="form-group">
-                            <input type="number" id="modelYear" formControlName="modelYear" class="form-control" placeholder="Model Yılı"/>
+                            <input type="number" id="modelYear" placeholder="Model Yılı" [(ngModel)]="mainCar.modelYear" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="dailyPrice">Günlük Fiyatı</label>
                         <div class="form-group">
-                            <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" placeholder="Günlük Fiyatı"/>
+                            <input type="number" id="dailyPrice" placeholder="Günlük Fiyatı" [(ngModel)]="mainCar.dailyPrice" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="description">Açıklama</label>
                         <div class="form-group">
-                            <input type="text" id="description" formControlName="description" class="form-control" placeholder="Açıklama"/>
+                            <input type="text" id="description" placeholder="Açıklama" [(ngModel)]="mainCar.description" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <div class="card-footer">
-            <button class="btn btn-fill btn-success">Ekle</button>
+            <button (click)="update(mainCar)" class="btn btn-fill btn-success">Güncelle</button>
         </div>
     </div>
 </div>
