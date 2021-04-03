@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe((response) => {
         this.toastrService.info(response.message);
         localStorage.setItem("token",response.data.token);
+        localStorage.setItem("email",loginModel.email);
+        window.location.reload();
       },responseError=>{
-        this.toastrService.error(responseError.error);
+        this.toastrService.error("Giriş Başarısız","Başarısız");
       });
     }
   }

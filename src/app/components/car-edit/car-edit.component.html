@@ -1,6 +1,6 @@
 <div class="content">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card" style="margin-inline: 75px; margin-block: 25px;">
             <div class="card-header">
                 <h5 class="title">Araba Düzenle</h5>
             </div>
@@ -55,7 +55,7 @@
                     <div class="mb-3">
                         <label for="minFindeks">Minimum Findeks Değeri</label>
                         <div class="form-group">
-                            <input type="number" id="minFindeks" placeholder="Model Yılı" [(ngModel)]="mainCar.minFindeks" [ngModelOptions]="{standalone: true}"/>
+                            <input class="form-control" type="number" id="minFindeks" placeholder="Model Yılı" [(ngModel)]="mainCar.minFindeks" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -67,20 +67,20 @@
                     <div class="mb-3">
                         <label for="dailyPrice">Günlük Fiyatı</label>
                         <div class="form-group">
-                            <input type="number" id="dailyPrice" placeholder="Günlük Fiyatı" [(ngModel)]="mainCar.dailyPrice" [ngModelOptions]="{standalone: true}"/>
+                            <input class="form-control" type="number" id="dailyPrice" placeholder="Günlük Fiyatı" [(ngModel)]="mainCar.dailyPrice" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="description">Açıklama</label>
                         <div class="form-group">
-                            <input type="text" id="description" placeholder="Açıklama" [(ngModel)]="mainCar.description" [ngModelOptions]="{standalone: true}"/>
+                            <input class="form-control" type="text" id="description" placeholder="Açıklama" [(ngModel)]="mainCar.description" [ngModelOptions]="{standalone: true}"/>
                         </div>
                     </div>
                 </form>
+                <div class="card-footer">
+                    <button (click)="update(mainCar)" class="btn btn-fill btn-success">Güncelle</button>
+                </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <button (click)="update(mainCar)" class="btn btn-fill btn-success">Güncelle</button>
         </div>
     </div>
 </div>

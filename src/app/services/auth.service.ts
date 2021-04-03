@@ -22,7 +22,6 @@ export class AuthService {
     return this.httpclient.post<SingleResponseModel<TokenModel>>(this.apiUrl+"/register",registerModel);
   }
 
-
   isAuthanticated(){
     if(localStorage.getItem("token")){
       return true;

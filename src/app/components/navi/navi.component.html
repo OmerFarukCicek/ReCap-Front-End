@@ -41,8 +41,20 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <div *ngIf="IsSignedBool == false">
+          <button class="btn btn-outline-success" routerLink="/login">Giriş Yap</button>
+          <button class="btn btn-outline-info" style="margin-left: 10px;" routerLink="/register">Kayıt Ol</button>
+        </div>
+        <div class="dropdown" *ngIf="IsSignedBool == true" style="margin-right: 15px;">
+          <button *ngIf="user" class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{user.firstName}}
+            {{user.lastName}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" routerLink="/userEdit">Bilgilerim</a></li>
+            <li><a class="dropdown-item" (click)="LogOut()">Çıkış Yap</a></li>
+          </ul>
+        </div>
       </form>
     </div>
   </div>

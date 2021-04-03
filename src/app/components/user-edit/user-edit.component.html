@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="col-md-12">
+        <div class="card" style="margin-inline: 75px; margin-block: 25px;">
+            <div class="card-header">
+                <h5 class="title">Kullanıcı Düzenle</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="firstName">Ad</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="firstName" placeholder="Ad" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastName">Soyad</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="lastName" placeholder="Soyad" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyPrice">Email</label>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="email" placeholder="Email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyPrice">Eski Şifre</label>
+                        <div class="form-group">
+                            <input class="form-control" type="password" id="oldPassword" placeholder="Eski Parola" [(ngModel)]="userCheckModel.password" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dailyPrice">Yeni Şifre</label>
+                        <div class="form-group">
+                            <input class="form-control" type="password" id="newPassword" placeholder="Yeni Parola" [(ngModel)]="userToUpdate.password" [ngModelOptions]="{standalone: true}"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="CheckUser()" class="btn btn-fill btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</div>

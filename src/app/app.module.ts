@@ -26,6 +26,8 @@ import { ColorEditComponent } from './components/color-edit/color-edit.component
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { RegisterComponent } from './components/register/register.component';
     ColorEditComponent,
     LoginComponent,
     CustomerComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserEditComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

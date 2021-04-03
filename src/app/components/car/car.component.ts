@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from 'src/app/models/brand';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
@@ -26,6 +26,7 @@ export class CarComponent implements OnInit {
   brands: Brand[] = [];
   colors: Color[] = [];
   customers: Customer[] = [];
+  creditCards: CreditCard[] = [];
   rental: Rental = {
     rentalId: 0,
     carId: 0,
@@ -35,14 +36,17 @@ export class CarComponent implements OnInit {
   };
   creditCard: CreditCard = {
     id: 0,
+    customerId: 0,
     cardNo: "",
     name: "",
     expiringDate: "",
-    cvv: 0
+    cvv: 0,
   }
   carImages: CarImage[];
   dataLoaded = false;
+  carFiltered = false;
   payment = false;
+  paymentLoad = false;
   filterText = "";
   filterColorId: number = 0;
   filterBrandId: number = 0;
@@ -55,18 +59,22 @@ export class CarComponent implements OnInit {
     private rentalService: RentalService,
     private creditCardService: CreditCardService,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (params["colorId"]) {
         this.getCarsByColor(params["colorId"]);
+        this.carFiltered = true;
       }
       else if (params["brandId"]) {
         this.getCarsByBrand(params["brandId"]);
+        this.carFiltered = true;
       }
       else if (params["carId"]) {
         this.getDetails(params["carId"]);
+        this.carFiltered = true;
       } else {
         this.getCars();
       }
@@ -86,21 +94,28 @@ export class CarComponent implements OnInit {
 
   getBrands() {
     this.brandService.getBrands().subscribe(response => {
-      this.brands = response.data
+      this.brands = response.data;
     })
   }
 
   getColors() {
     this.colorService.getColors().subscribe(response => {
-      this.colors = response.data
+      this.colors = response.data;
     })
   }
 
   getCustomers() {
     this.customerService.getCustomers().subscribe(response => {
-      this.customers = response.data
+      this.customers = response.data;
       this.dataLoaded = true;
     })
+  }
+
+  getCarImageClass(carImage:CarImage){
+    if (carImage == this.carImages[0]) {
+      return "carousel-item active";
+    }
+    return "carousel-item";
   }
 
   getCarsByColor(colorId: number) {
@@ -158,38 +173,27 @@ export class CarComponent implements OnInit {
       this.toastrService.success("Listeleme Başarılı", "Başarılı");
     }
   }
-
+  
   addRental(rental: Rental) {
+    localStorage.setItem("customerId",rental.customerId.toString());
     rental.carId = this.mainCar.carId;
     this.rentalService.addRental(rental).subscribe(
       (response) => {
         this.toastrService.success("Kiralama Başarılı", "Başarılı");
+        this.router.navigate([`payment`]);
         console.log(response.success);
         this.payment = true;
       },
       (responseError) => {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(
-              responseError.error.Errors[i].ErrorMessage,
-              'Doğrulama hatası'
-            );
-          }
-        }
+        this.toastrService.error("Kiralama Başarısız", "Başarısız");
       }
     );
   }
 
-  pay(creditCard: CreditCard) {
-    this.creditCardService.addCreditCard(creditCard).subscribe((response) => {
-      console.log(response.success);
-      this.toastrService.success("Ödeme Başarılı", "Başarılı");
-    })
-  }
-
   totalPrice(date1: string, date2: string) {
-    var diff = Math.floor((Date.parse(date2) - Date.parse(date1)) / 86400000)
+    var diff = Math.ceil((Date.parse(date2) - Date.parse(date1)) / 86400000)
     this.paymentNumber = diff * this.mainCar.dailyPrice;
+    localStorage.setItem("price",this.paymentNumber.toString());
   }
 
 }

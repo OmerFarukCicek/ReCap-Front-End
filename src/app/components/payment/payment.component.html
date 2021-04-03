@@ -1,0 +1,49 @@
+<div>
+    <h4 style="float: left; margin-left: 250px; margin-right: 25px;">Kayıtlı Kartlar:</h4>
+      <select class="form-select" aria-label="Default select example" style="max-width: 400px; margin-top: 25px;" [(ngModel)]="creditCard2.id" (change)="setCreditCard(creditCard2.id)">
+        <option *ngFor="let creditCard1 of creditCards" value="{{creditCard1.id}}">{{creditCard1.cardNo}} /
+          {{creditCard1.name}}</option>
+      </select>
+    <br>
+    <br>
+    <div class="card" style="margin-inline: 230px;">
+      <h5 class="card-header" style="text-align: center;">Ödeme İşlemi</h5>
+      <div class="card-body">
+        <h5 class="card-title" style="float: left;">Kart No</h5>
+        <h5 class="card-title" style="margin-left: 450px;">CVV</h5>
+        <input [(ngModel)]="creditCard.cardNo" maxlength="16" type="text" class="form-control disabled"
+          style=" width: 300px; float: left;" placeholder="*2356-9845-1245-6598" [disabled]="IsDisabled">
+        <input [(ngModel)]="creditCard.cvv" maxlength="3" type="text" class="form-control"
+          style=" width: 55px; margin-left: 450px;" placeholder="563" [disabled]="IsDisabled">
+        <h5 class="card-title" style="float: left;">Ad Soyad</h5>
+        <h5 class="card-title" style="margin-left: 450px;">Son Kullanma Tarihi</h5>
+        <input [(ngModel)]="creditCard.name" type="text" class="form-control" style=" width: 300px; float: left;"
+          placeholder="*ENGİN DEMİROĞ" [disabled]="IsDisabled">
+        <input [(ngModel)]="creditCard.expiringDate" maxlength="5" type="text" class="form-control"
+          style=" width: 100px; margin-left: 450px;" placeholder="03/25" [disabled]="IsDisabled">
+        <br>
+        <button type="button" style="width: 830px;" class="btn btn-success" data-bs-toggle="modal"
+          data-bs-target="#PaymentModal"><strong>{{paymentNumber |
+            currency:'₺'}}</strong> Ödeme Yap</button>
+
+        <div class="modal fade" id="PaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kredi Kartı Kayıt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <label>Bir sonraki alışverişleriniz için kredi kartı bilgilerinizi kaydetmek ister misiniz?</label>
+              </div>
+              <div class="modal-footer">
+                <button type="button" (click)="pay()" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                <button type="button" (click)="payAndSave(creditCard)" class="btn btn-primary" data-bs-dismiss="modal">Evet</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
