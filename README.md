@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
 
 # Kullanılan Teknolojiler
-TypeScript Angular Bootstrap
+TypeScript Angular https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 
 ## Development server
 
