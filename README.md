@@ -2,6 +2,11 @@
 
 RENT A CAR 
 
+# Görseller
+
+![Giriş](https://user-images.githubusercontent.com/69166430/113510596-46adde00-9564-11eb-9705-863cf9416c22.PNG)
+
+
 # Kullanılan Teknolojiler
 
 TypeScript Angular 
