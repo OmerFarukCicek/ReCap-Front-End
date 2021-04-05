@@ -6,10 +6,11 @@ RENT A CAR
 
 ![Giriş](https://user-images.githubusercontent.com/69166430/113510596-46adde00-9564-11eb-9705-863cf9416c22.PNG)
 
+## Kullanılan Teknolojiler
 
-# Kullanılan Teknolojiler
-
-TypeScript Angular 
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/)
   		 
 ## Development server
 
