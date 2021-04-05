@@ -1,6 +1,6 @@
 # Rent A Car
 
-RENT A CAR 
+###RENT A CAR 
 
 # Görseller
 
